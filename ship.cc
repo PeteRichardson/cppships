@@ -1,6 +1,7 @@
 #include "ship.h"
 
 #include <sstream>
+#include <fstream>
 
 Ship::Ship(std::string s) {
     std::istringstream csv_row(s);
@@ -30,4 +31,23 @@ std::ostream& operator<<(std::ostream& out, Ship s) {
     // Grampus: Fourth class (50g), 1802 -- Sold 1832
     out << s.name << ": " << Ship::rating2string[s.rating]<< " class (" << s.guns << "g), " << s.year_launched;
     return out;
+}
+
+using ShipList = std::vector<Ship>;
+
+ShipList GetShips(std::string filename) {
+    ShipList ships{};
+    std::ifstream ships_file(filename);
+
+    std::string line;
+    std::getline(ships_file, line);   // skip header
+    for (; std::getline(ships_file, line); ) {
+        auto temp_ship = Ship(line);
+        if (temp_ship.IsValid()) {
+            ships.push_back(temp_ship);
+            std::cout << "Read ship " << temp_ship << std::endl;
+        } else
+            std::cout << "# ERROR:  bogus line: " << line << std::endl;
+    }
+    return ships;
 }

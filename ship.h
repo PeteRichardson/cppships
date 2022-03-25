@@ -8,6 +8,8 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <vector>
+
 
 struct Ship {
 public:
@@ -48,5 +50,9 @@ public:
 };
 
 std::ostream& operator<<(std::ostream&, Ship);
+
+using ShipList = std::vector<Ship>;
+ShipList GetShips(std::string);
+
 
 #endif //CPPSHIPS_SHIP_H
