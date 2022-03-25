@@ -51,8 +51,10 @@ public:
 
 std::ostream& operator<<(std::ostream&, Ship);
 
-using ShipList = std::vector<Ship>;
-ShipList GetShips(std::string);
-
+class ShipList : public std::vector<Ship> {
+public:
+    ShipList(std::string);
+    ShipList();
+};
 
 #endif //CPPSHIPS_SHIP_H

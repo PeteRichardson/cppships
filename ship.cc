@@ -33,10 +33,9 @@ std::ostream& operator<<(std::ostream& out, Ship s) {
     return out;
 }
 
-using ShipList = std::vector<Ship>;
+ShipList::ShipList() : std::vector<Ship>{} {};
 
-ShipList GetShips(std::string filename) {
-    ShipList ships{};
+ShipList::ShipList(std::string filename) {
     std::ifstream ships_file(filename);
 
     std::string line;
@@ -44,10 +43,9 @@ ShipList GetShips(std::string filename) {
     for (; std::getline(ships_file, line); ) {
         auto temp_ship = Ship(line);
         if (temp_ship.IsValid()) {
-            ships.push_back(temp_ship);
+            this->push_back(temp_ship);
             std::cout << "Read ship " << temp_ship << std::endl;
         } else
             std::cout << "# ERROR:  bogus line: " << line << std::endl;
     }
-    return ships;
 }

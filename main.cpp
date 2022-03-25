@@ -3,9 +3,9 @@
 #include "ship.h"
 
 int main() {
-    ShipList ships = GetShips("../ships.csv");
+    ShipList ships("../ships.csv");
 
-    for (auto ship : ships)
+    for (auto & ship : ships)
         std::cout << ship << std::endl;
 
     std::cout << "Read " << ships.size() << " ships." << std::endl;
