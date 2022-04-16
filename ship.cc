@@ -29,7 +29,7 @@ bool Ship::IsValid() {
 
 std::ostream& operator<<(std::ostream& out, Ship s) {
     // Grampus: Fourth class (50g), 1802 -- Sold 1832
-    out << s.name << ": " << Ship::rating2string[s.rating]<< " class (" << s.guns << "g), " << s.year_launched;
+    out << std::left << std::setw(22) << s.name << std::left << std::setw(7) << Ship::rating2string[s.rating]<< " class (" << s.guns << "g), " << s.year_launched;
     return out;
 }
 
@@ -44,8 +44,8 @@ ShipList::ShipList(std::string filename) {
         auto temp_ship = Ship(line);
         if (temp_ship.IsValid()) {
             this->push_back(temp_ship);
-            std::cout << "Read ship " << temp_ship << std::endl;
+            //std::cout << "Read ship " << temp_ship << std::endl;
         } else
-            std::cout << "# ERROR:  bogus line: " << line << std::endl;
+            std::cerr << "# ERROR:  bogus line: " << line << std::endl;
     }
 }
